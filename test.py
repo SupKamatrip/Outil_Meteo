@@ -23,7 +23,7 @@ gps = data['coord']
 temp = data['main']['temp']
 print(gps)
 description = data['weather'][0]['description']
-weatherprint = "Dans {}, il fait actuellement {}°C avec {}. Les coordonnés sont {}."
+weatherprint = "A {}, il fait actuellement {}°C avec {}. Les coordonnés sont {}."
 spinner = spinning_cursor()
 for _ in range(25):
     sys.stdout.write(next(spinner))
