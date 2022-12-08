@@ -20,6 +20,7 @@ def spinning_cursor():  # Scimulation d'un temp de hcargement
 data = weather.json()
 
 temp = data['main']['temp']
+print(temp)
 description = data['weather'][0]['description']
 weatherprint = "Dans {}, il fait actuellement {}°C avec {}."
 spinner = spinning_cursor()
