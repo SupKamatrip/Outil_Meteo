@@ -1,26 +1,33 @@
-# python_test.py
 import requests
+import time
+import sys
+import googletrans
 
-api_key = "9db93bdd1a0d2f47617d2c9158a903fa"  # Enter the API key you got from the OpenWeatherMap website
-base_url = "http://api.openweathermap.org/data/2.5/weather?"
+weathercity = input("Météo pour quelle  ville ? : ")
+weather = requests.get('http://api.openweathermap.org/data/2.5/weather?q='+weathercity+'&appid=9db93bdd1a0d2f47617d2c9158a903fa')
+url = ('http://api.openweathermap.org/data/2.5/weather?q='+weathercity+'&appid=9db93bdd1a0d2f47617d2c9158a903fa')
 
-city_name = input("Enter city name : ")
-complete_url = base_url + "appid=" + 'd850f7f52bf19300a9eb4b0aa6b80f0d' + "&q=" + city_name  # This is to complete the base_url, you can also do this manually to checkout other weather data available
-response = requests.get(complete_url)
-x = response.json()
 
-if x["cod"] != "404":
-    y = x["main"]
 
-    current_temperature = y["temp"]
-    z = x["weather"]
 
-    weather_description = z[0]["description"]
+def spinning_cursor():  # Simulation d'un temp de hcargement
+    while True:
+        for cursor in '|/-\\':
+            yield cursor
 
-    print(" Temperature (in kelvin unit) = " +
-                    str(current_temperature) +
-          "\n description = " +
-                    str(weather_description))
 
-else:
-    print(" City Not Found ")
+data = weather.json()
+
+temp = data['main']['temp']
+description = data['weather'][0]['description']
+weatherprint ="Dans {}, il fait actuellement {}°C avec {}."
+spinner = spinning_cursor()
+for _ in range(25):
+    sys.stdout.write(next(spinner))
+    sys.stdout.flush()
+    time.sleep(0.1)
+    sys.stdout.write('\b')
+
+convert = int(temp - 273.15)
+
+print(weatherprint.format(weathercity, convert, description))
