@@ -19,10 +19,11 @@ def spinning_cursor():  # Scimulation d'un temp de hcargement
 
 data = weather.json()
 
+gps = data['coord']
 temp = data['main']['temp']
-print(temp)
+print(gps)
 description = data['weather'][0]['description']
-weatherprint = "Dans {}, il fait actuellement {}°C avec {}."
+weatherprint = "Dans {}, il fait actuellement {}°C avec {}. Les coordonnés sont {}."
 spinner = spinning_cursor()
 for _ in range(25):
     sys.stdout.write(next(spinner))
@@ -35,4 +36,4 @@ convert = int(temp - 273.15)
 #from googletrans import  Translator
 #trad = Translator()
 #descr = trad.translate(description, src='en', dest='fr')
-print(weatherprint.format(weathercity, convert, description))
+print(weatherprint.format(weathercity, convert, description, gps))
