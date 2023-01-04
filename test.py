@@ -16,17 +16,18 @@ def spinning_cursor():  # Scimulation d'un temp de hcargement
                           # s'éxécute qu'une seule fois
 
 data = weather.json()  # liste en java de weather ( notre requete est stockée dans une liste)
-
 gps = data['coord']  # retourne les coordonnées gps de la station météo
 temp = data['main']['temp'] # retourne les données contenus dans main et temp de la requête web
 description = data['weather'][0]['description']
+
 weatherprint = "A {}, il fait actuellement {}°C avec {}. Les coordonnées GPS de la station météo sont {}."
-spinner = spinning_cursor()
-for _ in range(25):
-    sys.stdout.write(next(spinner))
-    sys.stdout.flush()
-    time.sleep(0.1)
-    sys.stdout.write('\b')
+
+spinner = spinning_cursor()  # on fait appel à notre fonction précédemment définie
+for _ in range(25):  # le _ permet d'ignorer l'itération, peut importe là ou ca en est la boucle est lancée
+    sys.stdout.write(next(spinner))  # nous permet d'écrire/afficher le logo de chargement
+    sys.stdout.flush() # Affiche immediatement le curseur plutot que d'attendre que le tampon soit plein
+    time.sleep(0.1) # mets en pause 0.1 seconde a chaque itération dans la boucle for
+    sys.stdout.write('\b') # efface le précédent caractère
 
 convert = int(temp - 273.15)  # convertir les fahrenheit en celsius
 
