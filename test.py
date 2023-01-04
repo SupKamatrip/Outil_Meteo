@@ -18,10 +18,9 @@ def spinning_cursor():  # Scimulation d'un temp de hcargement
 data = weather.json()  # liste en java de weather ( notre requete est stockée dans une liste)
 
 gps = data['coord']  # retourne les coordonnées gps de la station météo
-temp = data['main']['temp']
-print(gps)
+temp = data['main']['temp'] # retourne les données contenus dans main et temp de la requête web
 description = data['weather'][0]['description']
-weatherprint = "A {}, il fait actuellement {}°C avec {}. Les coordonnés sont {}."
+weatherprint = "A {}, il fait actuellement {}°C avec {}. Les coordonnées GPS de la station météo sont {}."
 spinner = spinning_cursor()
 for _ in range(25):
     sys.stdout.write(next(spinner))
