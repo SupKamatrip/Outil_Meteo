@@ -20,14 +20,32 @@ def spinning_cursor():
 # liste en java de weather ( notre requete est stockée dans une liste)
 data = weather.json()
 
+for key, value in data.items():
+  print(key, value)
+
+
 # retourne les coordonnées gps de la station météo
 gps = data['coord']
 
-# retourne les données contenus dans main et temp de la requête web
+pays = data['sys']['country']
+
+humidite = data['main']['humidity']
+
+pression = data['main']['pressure']
+
 temp = data['main']['temp']
+
+venttemp = data['wind']['deg']
+
+ventsp = data['wind']['speed']
+
 description = data['weather'][0]['description']
 
-weatherprint = "A {}, il fait actuellement {}°C avec {}. Les coordonnées GPS de la station météo sont {}."
+print(data)
+
+weatherprint = "\nActuellement en {} a {}, il fait actuellement {}°C avec {}: \n\n-Le taux d'humidité est de {}% et la pression " \
+               "atmosphérique est de {} hPa.\n-Le vent souffle à {} m/s et sa température est de {}°C\n\nLes coordonnées GPS de la station météo " \
+               "sont {}."
 
 # on fait appel à notre fonction précédemment définie
 spinner = spinning_cursor()
@@ -47,10 +65,13 @@ for _ in range(25):
     # efface le précédent caractère
     sys.stdout.write('\b')
 
-# convertir les fahrenheit en celsius
+# convertir les kelvin en celsius
 convert = int(temp - 273.15)
+convert2 = int(venttemp - 273.15)
 
+
+#convert2 = int(tempressentie - 273.15)
 #from googletrans import  Translator
 #trad = Translator()
 #descr = trad.translate(description, src='en', dest='fr')
-print(weatherprint.format(weathercity, convert, description, gps))
+print(weatherprint.format(pays, weathercity, convert, description, humidite, pression, ventsp, convert2, gps))
