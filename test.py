@@ -1,8 +1,14 @@
+# Install the google-auth and google-api-python-client libraries
+#pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+
+# Import the necessary libraries
+#from google.oauth2.credentials import Credentials
+#from googleapiclient.discovery import build
 import requests
 import time
 import sys
 #import googletrans
-
+#from google_trans_new import google_translator
 # input va nous permettre de saisir le contenu de weathercity
 weathercity = input("Météo pour quelle  ville ? : ")
 
@@ -16,6 +22,7 @@ def spinning_cursor():
         for cursor in '|/-\\':
             yield cursor  # yield retourne le générateur cursor ( au lieu de stocker on récupère l'info à la volée )
                           # s'éxécute qu'une seule fois
+
 
 # liste en java de weather ( notre requete est stockée dans une liste)
 data = weather.json()
@@ -69,9 +76,22 @@ for _ in range(25):
 convert = int(temp - 273.15)
 convert2 = int(venttemp - 273.15)
 
+# Traduction du code
+# trans = google_translator
+# translated = trans.translate(description, lang_src = 'en', lang_tgt = 'fr')
 
+#translated_code = translate(description, "python", "français")
+#service = build('translate', 'v3', credentials=Credentials.from_authorized_user_info())
+#text = description
+#target_language = "fr"
+#result = service.translations().translate(
+#    q=text,
+#    target_language=target_language
+#).execute()
+#translate = print(result['translatedText'])
+#print(translate)
 #convert2 = int(tempressentie - 273.15)
 #from googletrans import  Translator
 #trad = Translator()
 #descr = trad.translate(description, src='en', dest='fr')
-print(weatherprint.format(pays, weathercity, convert, description, humidite, pression, ventsp, convert2, gps))
+print(weatherprint.format(pays, weathercity, convert, humidite, pression, ventsp, convert2, gps))
